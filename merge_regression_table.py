@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 # ---------- Quarterly ----------
@@ -21,7 +22,8 @@ df_q = (
     .merge(kd_q, on=key_q, how="left")
     .merge(rsi_q, on=key_q, how="left")
 )
-cols_q = key_q + ["RET", "ROA", "EPS", "ROE", "OM", "FCF", "total_assets", "LEV", "BIAS", "PPO", "K", "RSI"]
+df_q["SIZE"] = np.log(df_q["total_assets"])
+cols_q = key_q + ["RET", "ROA", "EPS", "ROE", "OM", "FCF", "total_assets", "LEV", "SIZE", "BIAS", "PPO", "K", "RSI"]
 df_q = df_q[cols_q].sort_values(key_q).reset_index(drop=True)
 df_q.to_csv("regression_quarterly.csv", index=False)
 print(f"quarterly: {df_q.shape[0]} rows × {df_q.shape[1]} cols")
@@ -48,7 +50,8 @@ df_y = (
     .merge(kd_y, on=key_y, how="left")
     .merge(rsi_y, on=key_y, how="left")
 )
-cols_y = key_y + ["RET", "ROA", "EPS", "ROE", "OM", "FCF", "total_assets", "LEV", "BIAS", "PPO", "K", "RSI"]
+df_y["SIZE"] = np.log(df_y["total_assets"])
+cols_y = key_y + ["RET", "ROA", "EPS", "ROE", "OM", "FCF", "total_assets", "LEV", "SIZE", "BIAS", "PPO", "K", "RSI"]
 df_y = df_y[cols_y].sort_values(key_y).reset_index(drop=True)
 df_y.to_csv("regression_yearly.csv", index=False)
 print(f"\nyearly: {df_y.shape[0]} rows × {df_y.shape[1]} cols")
