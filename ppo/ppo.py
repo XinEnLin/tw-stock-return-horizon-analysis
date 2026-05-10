@@ -38,8 +38,8 @@ quarterly = (
       .groupby(["coid", "year_q"])
       .last()
       .reset_index()
-      [["coid", "year_q", "date", "ppo"]]
-      .rename(columns={"date": "quarter_end_date", "ppo": "ppo_quarter_end"})
+      [["coid", "year_q", "ppo"]]
+      .rename(columns={"ppo": "ppo_quarter_end"})
 )
 
 # === 6. 年平均 PPO ===

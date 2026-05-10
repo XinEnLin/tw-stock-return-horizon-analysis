@@ -33,7 +33,6 @@ df["rsv"] = ((df["close"] - df["low_9"]) / denom * 100).where(denom != 0, 50)
 
 # === 4. K 與 D（α = 1/3 的 EMA，跨公司分組）===
 df["K"] = df.groupby("coid")["rsv"].transform(lambda x: x.ewm(alpha=1/3, adjust=False).mean())
-df["D"] = df.groupby("coid")["K"].transform(lambda x: x.ewm(alpha=1/3, adjust=False).mean())
 
 # === 5. 過濾 2020–2025 ===
 df = df[(df["date"] >= "2020-01-01") & (df["date"] <= "2025-12-31")].copy()
@@ -42,26 +41,24 @@ df["year_q"] = df["date"].dt.to_period("Q").astype(str)
 
 # === 6. 季平均 K 值（每家公司、每季所有交易日的平均）===
 quarterly_avg = (
-    df.groupby(["coid", "year_q"])[["K", "D"]]
+    df.groupby(["coid", "year_q"])["K"]
       .mean()
-      .rename(columns={"K": "K_avg", "D": "D_avg"})
+      .rename("K_avg")
       .reset_index()
 )
-quarterly_avg["K_minus_D_avg"] = quarterly_avg["K_avg"] - quarterly_avg["D_avg"]
 
 # === 7. 年平均 K 值（每家公司、每年所有交易日的平均）===
 annual_avg = (
-    df.groupby(["coid", "year"])[["K", "D"]]
+    df.groupby(["coid", "year"])["K"]
       .mean()
-      .rename(columns={"K": "K_avg", "D": "D_avg"})
+      .rename("K_avg")
       .reset_index()
 )
-annual_avg["K_minus_D_avg"] = annual_avg["K_avg"] - annual_avg["D_avg"]
 
 # === 8. 輸出結果 ===
 out_dir = os.path.dirname(os.path.abspath(__file__))
-quarterly_path = os.path.join(out_dir, "kd_quarterly_avg.csv")
-annual_path    = os.path.join(out_dir, "kd_annual_avg.csv")
+quarterly_path = os.path.join(out_dir, "kd_quarterly.csv")
+annual_path    = os.path.join(out_dir, "kd_yearly.csv")
 
 quarterly_avg.to_csv(quarterly_path, index=False, encoding="utf-8-sig")
 annual_avg.to_csv(annual_path,    index=False, encoding="utf-8-sig")
