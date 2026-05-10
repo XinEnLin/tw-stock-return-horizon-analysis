@@ -52,6 +52,7 @@ df = df.rename(columns={
     "收盤價(元)": "close",
 })
 
+df["coid"] = df["coid"].astype(str).str.split().str[0]
 df["date"] = pd.to_datetime(df["date"].astype(str), format="%Y%m%d")
 df = df.sort_values(["coid", "date"]).reset_index(drop=True)
 print(f"總筆數：{len(df):,} | 公司數：{df['coid'].nunique()}")

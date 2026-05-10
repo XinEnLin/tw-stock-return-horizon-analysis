@@ -16,6 +16,7 @@ df = df.rename(columns={
     "收盤價(元)": "close"
 })
 
+df["coid"] = df["coid"].astype(str).str.split().str[0]
 df["date"] = pd.to_datetime(df["date"].astype(str), format="%Y%m%d")
 df = df.sort_values(["coid", "date"]).reset_index(drop=True)
 
@@ -51,8 +52,8 @@ yearly = (
 )
 
 # === 7. 輸出成 CSV ===
-quarterly_path = os.path.join(script_dir, "quarterly_ppo.csv")
-yearly_path = os.path.join(script_dir, "yearly_ppo.csv")
+quarterly_path = os.path.join(script_dir, "ppo_quarterly.csv")
+yearly_path = os.path.join(script_dir, "ppo_yearly.csv")
 quarterly.to_csv(quarterly_path, index=False, encoding="utf-8-sig")
 yearly.to_csv(yearly_path, index=False, encoding="utf-8-sig")
 print("完成！季末 PPO：", quarterly_path)
