@@ -247,11 +247,14 @@ def run_grouped_comparison(df_q, df_y, y_var, log):
     print("=" * 100)
     print("用途：完整模型的 R² 受 PPO 機械相關影響而偏高，分組後可看各類指標的真實解釋力\n")
 
-    # 三個模型的變數組合
+    # 四個模型的變數組合
+    # 「完整模型 (排除 PPO)」用於檢視 PPO（與 RET 有機械相關）對 R² 的影響：
+    # 拿掉 PPO 後 Adj R² 下降幅度，即 PPO 單一變數的增量解釋力
     model_specs = {
-        "基本面 + 控制": FUND_VARS + CTRL_VARS,
-        "技術面 + 控制": TECH_VARS + CTRL_VARS,
-        "完整模型":      FUND_VARS + TECH_VARS + CTRL_VARS,
+        "基本面 + 控制":       FUND_VARS + CTRL_VARS,
+        "技術面 + 控制":       TECH_VARS + CTRL_VARS,
+        "完整模型":            FUND_VARS + TECH_VARS + CTRL_VARS,
+        "完整模型 (排除 PPO)": FUND_VARS + [v for v in TECH_VARS if v != "PPO"] + CTRL_VARS,
     }
 
     rows = []
@@ -299,6 +302,23 @@ def run_grouped_comparison(df_q, df_y, y_var, log):
         print("  → 基本面解釋力在長期（年）明顯高於短期（季），【支持「基本面看長」】")
     if abs(tech_y - tech_q) < 0.05:
         print("  → 技術面解釋力在長短期相近，且兩者皆高，【支持「技術面在各期間均有效」】")
+
+    # ---------- PPO 增量解釋力：完整模型 vs 完整模型(排除 PPO) ----------
+    full_q = result_df[(result_df["期間"]=="季版（短期）") &
+                       (result_df["模型"]=="完整模型")]["Adj_R2"].values[0]
+    full_y = result_df[(result_df["期間"]=="年版（長期）") &
+                       (result_df["模型"]=="完整模型")]["Adj_R2"].values[0]
+    noppo_q = result_df[(result_df["期間"]=="季版（短期）") &
+                        (result_df["模型"]=="完整模型 (排除 PPO)")]["Adj_R2"].values[0]
+    noppo_y = result_df[(result_df["期間"]=="年版（長期）") &
+                        (result_df["模型"]=="完整模型 (排除 PPO)")]["Adj_R2"].values[0]
+
+    print()
+    print(f"  PPO 增量解釋力（完整模型 → 排除 PPO 後的 Adj R² 下降幅度）：")
+    print(f"    季版：{full_q:.4f} → {noppo_q:.4f}（下降 {full_q - noppo_q:.4f}）")
+    print(f"    年版：{full_y:.4f} → {noppo_y:.4f}（下降 {full_y - noppo_y:.4f}）")
+    print(f"  → PPO 單一變數即貢獻完整模型約 {(full_q - noppo_q):.0%}~{(full_y - noppo_y):.0%} 的解釋力，")
+    print(f"     此高貢獻部分肇因於 PPO 與當期 RET 之機械相關，論文宜於研究限制說明。")
 
     return result_df
 

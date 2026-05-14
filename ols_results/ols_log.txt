@@ -10,7 +10,7 @@ Dep. Variable:                    RET   R-squared:                       0.785
 Model:                            OLS   Adj. R-squared:                  0.785
 Method:                 Least Squares   F-statistic:                     8518.
 Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
-Time:                        14:50:48   Log-Likelihood:                -71307.
+Time:                        15:54:46   Log-Likelihood:                -71307.
 No. Observations:               23359   AIC:                         1.426e+05
 Df Residuals:                   23348   BIC:                         1.427e+05
 Df Model:                          10                                         
@@ -48,7 +48,7 @@ Dep. Variable:                    RET   R-squared:                       0.785
 Model:                            OLS   Adj. R-squared:                  0.785
 Method:                 Least Squares   F-statistic:                     8518.
 Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
-Time:                        14:50:48   Log-Likelihood:                -15199.
+Time:                        15:54:46   Log-Likelihood:                -15199.
 No. Observations:               23359   AIC:                         3.042e+04
 Df Residuals:                   23348   BIC:                         3.051e+04
 Df Model:                          10                                         
@@ -88,7 +88,7 @@ Dep. Variable:                    RET   R-squared:                       0.788
 Model:                            OLS   Adj. R-squared:                  0.788
 Method:                 Least Squares   F-statistic:                     2194.
 Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
-Time:                        14:50:49   Log-Likelihood:                -26737.
+Time:                        15:54:46   Log-Likelihood:                -26737.
 No. Observations:                5915   AIC:                         5.350e+04
 Df Residuals:                    5904   BIC:                         5.357e+04
 Df Model:                          10                                         
@@ -126,7 +126,7 @@ Dep. Variable:                    RET   R-squared:                       0.788
 Model:                            OLS   Adj. R-squared:                  0.788
 Method:                 Least Squares   F-statistic:                     2194.
 Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
-Time:                        14:50:49   Log-Likelihood:                -3805.3
+Time:                        15:54:47   Log-Likelihood:                -3805.3
 No. Observations:                5915   AIC:                             7633.
 Df Residuals:                    5904   BIC:                             7706.
 Df Model:                          10                                         
@@ -158,10 +158,12 @@ Notes:
 ==========================================================================================
 分組模型比較（基本面 / 技術面 / 完整模型）
 ==========================================================================================
-    期間       模型  變數數  R_squared  Adj_R2     F_stat  F_pvalue
-季版（短期） 基本面 + 控制    6     0.0024  0.0021     9.3457    0.0000
-季版（短期） 技術面 + 控制    6     0.7844  0.7843 14159.2389    0.0000
-季版（短期）     完整模型   10     0.7849  0.7848  8517.8656    0.0000
-年版（長期） 基本面 + 控制    6     0.0940  0.0931   102.1438    0.0000
-年版（長期） 技術面 + 控制    6     0.7845  0.7843  3585.5733    0.0000
-年版（長期）     完整模型   10     0.7880  0.7876  2194.2120    0.0000
+    期間            模型  變數數  R_squared  Adj_R2     F_stat  F_pvalue
+季版（短期）      基本面 + 控制    6     0.0024  0.0021     9.3457    0.0000
+季版（短期）      技術面 + 控制    6     0.7844  0.7843 14159.2389    0.0000
+季版（短期）          完整模型   10     0.7849  0.7848  8517.8656    0.0000
+季版（短期） 完整模型 (排除 PPO)    9     0.5342  0.5340  2975.3582    0.0000
+年版（長期）      基本面 + 控制    6     0.0940  0.0931   102.1438    0.0000
+年版（長期）      技術面 + 控制    6     0.7845  0.7843  3585.5733    0.0000
+年版（長期）          完整模型   10     0.7880  0.7876  2194.2120    0.0000
+年版（長期） 完整模型 (排除 PPO)    9     0.3072  0.3062   290.9397    0.0000
