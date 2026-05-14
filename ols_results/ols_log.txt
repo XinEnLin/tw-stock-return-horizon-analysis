@@ -2,13 +2,15 @@
 ==========================================================================================
 【季版（短期模型）】OLS 回歸結果
 ==========================================================================================
+
+--- (A) 原始迴歸 ---
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                    RET   R-squared:                       0.785
 Model:                            OLS   Adj. R-squared:                  0.785
 Method:                 Least Squares   F-statistic:                     8518.
-Date:                Sun, 10 May 2026   Prob (F-statistic):               0.00
-Time:                        10:59:26   Log-Likelihood:                -71307.
+Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
+Time:                        14:50:48   Log-Likelihood:                -71307.
 No. Observations:               23359   AIC:                         1.426e+05
 Df Residuals:                   23348   BIC:                         1.427e+05
 Df Model:                          10                                         
@@ -39,16 +41,54 @@ Notes:
 [2] The condition number is large, 1.17e+03. This might indicate that there are
 strong multicollinearity or other numerical problems.
 
+--- (B) 標準化迴歸 ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    RET   R-squared:                       0.785
+Model:                            OLS   Adj. R-squared:                  0.785
+Method:                 Least Squares   F-statistic:                     8518.
+Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
+Time:                        14:50:48   Log-Likelihood:                -15199.
+No. Observations:               23359   AIC:                         3.042e+04
+Df Residuals:                   23348   BIC:                         3.051e+04
+Df Model:                          10                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const      -7.007e-18      0.003  -2.31e-15      1.000      -0.006       0.006
+EPS            0.0063      0.004      1.450      0.147      -0.002       0.015
+ROE           -0.0025      0.005     -0.562      0.574      -0.011       0.006
+OM            -0.0084      0.003     -2.464      0.014      -0.015      -0.002
+FCF           -0.0186      0.003     -6.068      0.000      -0.025      -0.013
+BIAS          -0.0096      0.003     -3.091      0.002      -0.016      -0.004
+PPO            0.7675      0.005    164.934      0.000       0.758       0.777
+K             -0.0187      0.004     -5.226      0.000      -0.026      -0.012
+RSI            0.1674      0.004     38.045      0.000       0.159       0.176
+SIZE          -0.0202      0.003     -5.835      0.000      -0.027      -0.013
+LEV            0.0105      0.003      3.217      0.001       0.004       0.017
+==============================================================================
+Omnibus:                    11556.658   Durbin-Watson:                   1.975
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           262656.238
+Skew:                           1.876   Prob(JB):                         0.00
+Kurtosis:                      18.993   Cond. No.                         2.95
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
 ==========================================================================================
 【年版（長期模型）】OLS 回歸結果
 ==========================================================================================
+
+--- (A) 原始迴歸 ---
                             OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                    RET   R-squared:                       0.788
 Model:                            OLS   Adj. R-squared:                  0.788
 Method:                 Least Squares   F-statistic:                     2194.
-Date:                Sun, 10 May 2026   Prob (F-statistic):               0.00
-Time:                        10:59:26   Log-Likelihood:                -26737.
+Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
+Time:                        14:50:49   Log-Likelihood:                -26737.
 No. Observations:                5915   AIC:                         5.350e+04
 Df Residuals:                    5904   BIC:                         5.357e+04
 Df Model:                          10                                         
@@ -78,3 +118,50 @@ Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 [2] The condition number is large, 1.29e+03. This might indicate that there are
 strong multicollinearity or other numerical problems.
+
+--- (B) 標準化迴歸 ---
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    RET   R-squared:                       0.788
+Model:                            OLS   Adj. R-squared:                  0.788
+Method:                 Least Squares   F-statistic:                     2194.
+Date:                Thu, 14 May 2026   Prob (F-statistic):               0.00
+Time:                        14:50:49   Log-Likelihood:                -3805.3
+No. Observations:                5915   AIC:                             7633.
+Df Residuals:                    5904   BIC:                             7706.
+Df Model:                          10                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const      -4.364e-18      0.006  -7.28e-16      1.000      -0.012       0.012
+EPS            0.0388      0.008      4.759      0.000       0.023       0.055
+ROE            0.0401      0.009      4.379      0.000       0.022       0.058
+OM            -0.0323      0.007     -4.453      0.000      -0.047      -0.018
+FCF           -0.0130      0.006     -2.131      0.033      -0.025      -0.001
+BIAS           0.0448      0.006      7.140      0.000       0.032       0.057
+PPO            0.8768      0.008    115.705      0.000       0.862       0.892
+K             -0.0598      0.008     -7.586      0.000      -0.075      -0.044
+RSI            0.0820      0.006     12.954      0.000       0.070       0.094
+SIZE          -0.0571      0.007     -8.151      0.000      -0.071      -0.043
+LEV            0.0279      0.007      4.273      0.000       0.015       0.041
+==============================================================================
+Omnibus:                     4100.372   Durbin-Watson:                   1.800
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            97875.003
+Skew:                           3.005   Prob(JB):                         0.00
+Kurtosis:                      22.000   Cond. No.                         3.07
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+==========================================================================================
+分組模型比較（基本面 / 技術面 / 完整模型）
+==========================================================================================
+    期間       模型  變數數  R_squared  Adj_R2     F_stat  F_pvalue
+季版（短期） 基本面 + 控制    6     0.0024  0.0021     9.3457    0.0000
+季版（短期） 技術面 + 控制    6     0.7844  0.7843 14159.2389    0.0000
+季版（短期）     完整模型   10     0.7849  0.7848  8517.8656    0.0000
+年版（長期） 基本面 + 控制    6     0.0940  0.0931   102.1438    0.0000
+年版（長期） 技術面 + 控制    6     0.7845  0.7843  3585.5733    0.0000
+年版（長期）     完整模型   10     0.7880  0.7876  2194.2120    0.0000
