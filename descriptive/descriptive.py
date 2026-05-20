@@ -25,6 +25,7 @@ Step 4：敘述統計
 - descriptive_quarterly.csv   季版敘述統計
 - descriptive_yearly.csv      年版敘述統計
 - descriptive_combined.csv    季 / 年合併對照（給論文表格用）
+- descriptive_log.txt         統計結果資料（三張表的文字版）
 =========================================================
 """
 
@@ -35,7 +36,7 @@ import os
 # =========================================================
 # 設定區
 # =========================================================
-DATA_FOLDER   = os.path.join(os.path.dirname(os.path.abspath(__file__)), "clean_data")
+DATA_FOLDER   = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "clean_data")
 OUTPUT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "descriptive_stats")
 FILE_Q = "regression_quarterly_clean.csv"
 FILE_Y = "regression_yearly_clean.csv"
@@ -170,3 +171,34 @@ print("""
    （如 PPO 標準差約 2、SIZE 約 1.4、FCF 達 80+），
    這也再次說明跨變數比較係數時須採用標準化迴歸。
 """)
+
+
+# =========================================================
+# 輸出 descriptive_log.txt（僅統計結果資料）
+# =========================================================
+out_log = os.path.join(OUTPUT_FOLDER, "descriptive_log.txt")
+
+SEP = "=" * 95
+lines = []
+
+lines.append(SEP)
+lines.append("【季版（短期）】敘述統計")
+lines.append(SEP)
+lines.append(desc_q.round(4).to_string())
+
+lines.append("")
+lines.append(SEP)
+lines.append("【年版（長期）】敘述統計")
+lines.append(SEP)
+lines.append(desc_y.round(4).to_string())
+
+lines.append("")
+lines.append(SEP)
+lines.append("【季 / 年對照】敘述統計（論文表格用，僅列關鍵欄位）")
+lines.append(SEP)
+lines.append(combined.round(4).to_string())
+
+with open(out_log, "w", encoding="utf-8") as f:
+    f.write("\n".join(lines) + "\n")
+
+print(f"統計結果 log   : {out_log}")
